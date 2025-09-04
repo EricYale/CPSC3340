@@ -20,7 +20,7 @@ cat > "$SCRIPT_DIR/ip.md" <<'EOF'
                              |__/          
 ```
 
-Hello, Eric.
+Hello, Eric. Long time no see <3
 
 EOF
 
