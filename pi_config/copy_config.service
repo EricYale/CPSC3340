@@ -1,0 +1,13 @@
+[Unit]
+Description=Upload pi config to git repo
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=student334
+WorkingDirectory=/home/student334/Desktop/CPSC3340
+ExecStart=/home/student334/Desktop/CPSC3340/pi_config/copy_config.sh
+
+[Install]
+WantedBy=multi-user.target
