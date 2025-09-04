@@ -1,11 +1,15 @@
 #!/bin/bash
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-IP_ADDR=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+# Only run for wlan0 interface
+if [ "$interface" != "wlan0" ]; then
+    exit 0
+fi
 
-cp /boot/firmware/config.txt "$SCRIPT_DIR/config.txt"
+CONFIG_DIR="/Users/yooniverse/Documents/Git/CPSC3340/pi_config"
 
-cat > "$SCRIPT_DIR/ip.md" <<'EOF'
+cp /boot/firmware/config.txt "$CONFIG_DIR/config.txt"
+
+cat > "$CONFIG_DIR/ip.md" <<'EOF'
 ```
                                         /$$
                                        |__/
@@ -20,13 +24,13 @@ cat > "$SCRIPT_DIR/ip.md" <<'EOF'
                              |__/          
 ```
 
-Hello, Eric.
+Hello, Eric <3
 
 EOF
 
-echo "My IP is \`$IP_ADDR\`." >> "$SCRIPT_DIR/ip.md"
+echo "My IP is \`$new_ip_address\`." >> "$CONFIG_DIR/ip.md"
 
-cd "$SCRIPT_DIR"
+cd "$CONFIG_DIR"
 git pull
 git add .
 git commit -m "[Auto commit] Config backup"
