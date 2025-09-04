@@ -12,6 +12,6 @@
                              |__/          
 ```
 
-Hello, Eric <3
+Hello, Eric. <33
 
-My IP is `10.67.64.78`.
+My IP is ``.
