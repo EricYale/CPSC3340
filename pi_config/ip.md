@@ -1,11 +1,3 @@
-#!/bin/bash
-IP_ADDR=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
-
-cd ~/CPSC3340/pi_config
-
-cp /boot/firmware/config.txt .
-
-cat > ip.md <<'EOF'
 ```
                                         /$$
                                        |__/
@@ -22,11 +14,4 @@ cat > ip.md <<'EOF'
 
 Hello, Eric <3
 
-EOF
-
-echo "My IP is \`$IP_ADDR\`." >> ip.md
-
-git pull
-git add .
-git commit -m "[Auto commit] Config backup"
-git push
+My IP is `10.67.64.78`.
