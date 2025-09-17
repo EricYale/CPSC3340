@@ -4,6 +4,8 @@
 
 An art project that visualizes movement of students throughout Yale campus.
 
+[Video demos](https://photos.app.goo.gl/s4bA6mkPbBeu7Btf9)
+
 ## Run the project
 
 ### Run the data pipeline
