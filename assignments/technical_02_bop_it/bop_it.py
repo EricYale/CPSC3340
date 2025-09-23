@@ -31,7 +31,7 @@ def play_sound(filename):
 
 def loop_intro():
     global t
-    if t > 2.5:
+    if t > 3.5:
         play_sound("voice_start.wav")
         t = 0
     if joystick.is_pressed:
@@ -44,10 +44,37 @@ SAMPLES = [
 ]
 
 last_beat_was_downbeat = False
+last_input_was_downbeat = False
+
+last_switch_state = False
+
+has_flicked_switch = False
+has_pressed_button = False
+has_joysticked = False
+last_sample_played = None
+
+
+def player_did_input():
+    global last_sample_played, has_flicked_switch, has_pressed_button, has_joysticked
+    if last_sample_played == "voice_bopit.wav" and has_joysticked:
+        return True
+    if last_sample_played == "voice_flickit.wav" and has_flicked_switch:
+        return True
+    if last_sample_played == "voice_pressit.wav" and has_pressed_button:
+        return True
+    return False
+    
+def play_sample():
+    global has_flicked_switch, has_pressed_button, has_joysticked, last_sample_played
+    last_sample_played = random.choice(SAMPLES)
+    play_sound(last_sample_played)
+    has_flicked_switch = False
+    has_pressed_button = False
+    has_joysticked = False
 
 
 def loop_game():
-    global last_beat_was_downbeat
+    global last_beat_was_downbeat, last_switch_state, has_flicked_switch, has_pressed_button, has_joysticked, last_input_was_downbeat
     music_pos_ms = pygame.mixer.music.get_pos()
     if music_pos_ms < 0:
         return  # music not playing
@@ -56,16 +83,38 @@ def loop_game():
     beat_length_ms = 1000 * 60 / TEMPO
     
     if music_pos_ms < beat_length_ms * 8 and (not last_beat_was_downbeat):
+        play_sample()
         last_beat_was_downbeat = True
-        play_sound(random.choice(SAMPLES))
     elif music_pos_ms > beat_length_ms * 8 and last_beat_was_downbeat:
+        play_sample()
         last_beat_was_downbeat = False
-        play_sound(random.choice(SAMPLES))
+
+    if music_pos_ms > beat_length_ms * 4 and music_pos_ms < beat_length_ms * 8 and (not last_input_was_downbeat):
+        last_input_was_downbeat = True
+        if not player_did_input():
+            state_transition("game_over")
+    elif music_pos_ms > beat_length_ms * 12 and last_input_was_downbeat:
+        last_input_was_downbeat = False
+        if not player_did_input():
+            state_transition("game_over")
     
+    if not switch.is_pressed == last_switch_state and not has_flicked_switch:
+        last_switch_state = switch.is_pressed
+        has_flicked_switch = True
+        print("Player flicked switch")
+    if pushbutton.is_pressed and not has_pressed_button:
+        has_pressed_button = True
+        print("Player pressed button")
+    if joystick.is_pressed and not has_joysticked:
+        has_joysticked = True
+        print("Player moved joystick")
 
 def loop_game_over():
     stop_bgm()
-    print("In game over loop")
+    global t
+    if t > 2.5:
+        state_transition("intro")
+    t += 1 / FRAMERATE
 
 def loop():
     global t, game_state
@@ -88,6 +137,7 @@ def state_transition(new_state):
         play_bgm()
     elif new_state == "game_over":
         stop_bgm()
+        play_sound("voice_lose.wav")
 
 def main():
     state_transition("intro")
