@@ -1,8 +1,8 @@
 #!/bin/bash
 
 sudo pinctrl set 2 op
-sudo pinctrl set 3 ip pd
-sudo pinctrl set 4 ip pd
+sudo pinctrl set 3 ip pu
+sudo pinctrl set 4 ip pu
 sudo pinctrl set 17 ip pu
 
 while true
