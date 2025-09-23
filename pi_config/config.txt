@@ -49,3 +49,6 @@ otg_mode=1
 dtoverlay=dwc2,dr_mode=host
 
 [all]
+hdmi_drive=2
+hdmi_force_edid_audio=1
+
