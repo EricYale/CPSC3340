@@ -1,0 +1,6 @@
+[submodule "modules/01_creative"]
+	path = modules/01_creative
+	url = https://github.com/EricYale/people-visualizer
+[submodule "modules/02_creative"]
+	path = modules/02_creative
+	url = https://github.com/EricYale/GameCabinet
