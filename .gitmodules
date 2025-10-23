@@ -4,3 +4,6 @@
 [submodule "modules/02_creative"]
 	path = modules/02_creative
 	url = https://github.com/EricYale/GameCabinet
+[submodule "modules/03_creative"]
+	path = modules/03_creative
+	url = https://github.com/EricYale/judgment-zoo
