@@ -11,14 +11,10 @@ void setup() {
 
 int servoPos = 0;
 void loop() {
-  myStepper.step(2048);
-  servo.write(servoPos);
-  servoPos += 10;
-
-  if(servoPos > 180) {
-    servoPos = 180;
-    servo.write(0);
-  }
-
-  delay(15);
+  servo.write(0);
+  delay(700);
+  servo.write(95);
+  delay(700);
+  servo.write(210);
+  delay(700);
 }

@@ -7,3 +7,6 @@
 [submodule "modules/03_creative"]
 	path = modules/03_creative
 	url = https://github.com/EricYale/judgment-zoo
+[submodule "modules/04_creative"]
+	path = modules/04_creative
+	url = https://github.com/ericyale/ouija-gpt
