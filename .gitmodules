@@ -10,3 +10,6 @@
 [submodule "modules/04_creative"]
 	path = modules/04_creative
 	url = https://github.com/ericyale/ouija-gpt
+[submodule "modules/final_project"]
+	path = modules/final_project
+	url = https://github.com/michaelcanudas/CPSC-3340-Final-Project
