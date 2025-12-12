@@ -1,3 +1,15 @@
+/*
+
+This was a vibe-coded attempt at making a networked
+game for ESP32s. It would be a "buzzer" reaction time game
+where everyone tries to press their button as fast as possible
+after a light turns on. Unfortunately I never got it to work. :(
+
+*/
+
+
+
+
 #include <esp_now.h>
 #include <WiFi.h>
 #include <esp_wifi.h>
